@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <input type="text" id="firstName" placeholder="Enter First Name" required>
+        <input type="text" id="lastName" placeholder="Enter Last Name" required>
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        
+        <select id="country" required>
+            <option value="">Select Country</option>
+            <option value="USA">United States</option>
+            <option value="India">India</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+        </select>
+        
+        <select id="city" required>
+            <option value="">Select City</option>
+        </select>
+        
+        <input type="tel" id="phone" placeholder="Enter Phone Number" required>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        const citiesByCountry = {
+            "USA": ["New York", "Los Angeles", "Chicago"],
+            "India": ["Mumbai", "Delhi", "Bangalore"],
+            "UK": ["London", "Manchester", "Birmingham"],
+            "Canada": ["Toronto", "Vancouver", "Montreal"],
+            "Australia": ["Sydney", "Melbourne", "Brisbane"],
+            "Germany": ["Berlin", "Hamburg", "Munich"],
+            "France": ["Paris", "Lyon", "Marseille"]
+        };
+
+        document.getElementById("country").addEventListener("change", function() {
+            const country = this.value;
+            const citySelect = document.getElementById("city");
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            if (country && citiesByCountry[country]) {
+                citiesByCountry[country].forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        });
+
+        function login() {
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let country = document.getElementById("country").value;
+            let city = document.getElementById("city").value;
+            let phone = document.getElementById("phone").value;
+            
+            if (!firstName || !lastName || !email || !password || !country || !city || !phone) {
+                alert("Please fill in all fields");
+                return;
+            }
+            
+            alert("Login successful! Welcome, " + firstName + " " + lastName);
+            
+            // Redirect to another page
+            window.location.href = "main web.html"; // Change this to your next page
+        }
+    </script>
+</body>
+</html>
